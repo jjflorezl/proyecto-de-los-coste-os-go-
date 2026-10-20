@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#123d36">
+  <title>Costeños · Central hospitalaria</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="/style.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <aside class="sidebar">
+    <a class="brand" href="#inicio"><span class="brand-mark">✳</span><span>costeños<span class="brand-small">CUIDAMOS TU DESCANSO</span></span></a>
+    <div class="nav-label">CENTRAL HOSPITALARIA</div>
+    <nav aria-label="Secciones"><a href="#inicio" class="nav-item active"><span>◉</span> Vista general</a><a href="#pacientes" class="nav-item"><span>♧</span> Pacientes <span class="nav-count">05</span></a><a href="#habitaciones" class="nav-item"><span>▦</span> Habitaciones</a><a href="#historial" class="nav-item"><span>◷</span> Historial</a><a href="#severidad" class="nav-item"><span>≋</span> Reporte de severidad</a></nav>
+    <div class="sidebar-note"><span class="little-cross">+</span><strong>Un lugar para despertar bien.</strong><p>Hospital de los Costeños con Narcolepsia</p></div>
+    <div class="author"><div class="avatar">JF</div><div>Juan José Flórez López<small>Proyecto de POO · Go</small></div></div>
+  </aside>
+  <main id="inicio">
+    <header class="topbar"><div><span class="breadcrumb">Hospital</span><span class="slash">/</span> Vista general</div><div class="connection"><span id="connection-dot"></span><span id="connection-label">Conectando</span><time id="today"></time></div></header>
+    <section class="welcome"><div><p class="eyebrow">CADA PACIENTE, EN EL LUGAR CORRECTO</p><h1>El descanso está bajo cuidado.</h1><p>Pacientes, camas y atención. Todo en una sola vista.</p></div><button id="simulation" class="button primary" disabled><span>▷</span> Iniciar simulación</button></section>
+    <div id="notice" class="notice" role="status" aria-live="polite">Cargando el estado del hospital…</div>
+    <section class="stats" aria-label="Resumen hospitalario"><article class="stat"><div>Pacientes admitidos<span class="stat-icon">♧</span></div><strong id="total-patients">—</strong><p>Atención y seguimiento activo</p></article><article class="stat"><div>Camas disponibles<span class="stat-icon">▦</span></div><strong id="free-beds">—</strong><p id="bed-detail">Consultando habitaciones</p></article><article class="stat warning"><div>Pacientes en pasillo<span class="stat-icon">!</span></div><strong id="hallway-count">—</strong><p id="hallway-detail">En espera de una cama</p></article><article class="stat"><div>Episodios registrados<span class="stat-icon">◷</span></div><strong id="episode-count">—</strong><p>Historial de esta sesión</p></article></section>
+    <div class="main-grid">
+      <section class="panel patients-panel" id="pacientes"><div class="section-heading"><div><p class="eyebrow">SEGUIMIENTO EN TIEMPO REAL</p><h2>Pacientes</h2></div><span class="subtle-tag">5 admitidos</span></div><div class="patient-tools"><label class="search"><span>⌕</span><input id="search" type="search" placeholder="Buscar por nombre o ID" aria-label="Buscar pacientes"></label><label class="location-field">Lugar del episodio<select id="location"><option>Cafetería</option><option>Jardín</option><option>Fila de radiología</option><option>Pasillo 2, segundo piso</option><option>Sala de espera</option></select></label></div><div class="table-wrap"><table><thead><tr><th>Paciente</th><th>Estado / ubicación</th><th>Atención</th><th>Acción</th></tr></thead><tbody id="patient-rows"></tbody></table></div><p class="panel-footnote">Registra un episodio para despachar al personal y buscar la primera cama libre.</p></section>
+      <section class="panel" id="habitaciones"><div class="section-heading"><div><p class="eyebrow">ASIGNACIÓN DE CAMAS</p><h2>Habitaciones</h2></div><span class="tiny-label">PISO 1</span></div><div id="rooms" class="rooms"></div><div class="legend"><span><i class="dot free"></i> Disponible</span><span><i class="dot used"></i> Ocupada</span></div></section>
+    </div>
+    <div class="bottom-grid"><section class="panel" id="historial"><div class="section-heading"><div><p class="eyebrow">CADA INTERVENCIÓN CUENTA</p><h2>Historial de episodios</h2></div><label><span class="sr-only">Filtrar por personal</span><select id="staff-filter"><option value="">Todo el personal</option></select></label></div><div id="history" class="history"></div></section><section class="panel" id="severidad"><div class="section-heading"><div><p class="eyebrow">HOY · HORA COLOMBIA</p><h2>Severidad alta</h2></div><span class="badge severe">Severo</span></div><p class="section-description">Episodios de hoy por paciente con diagnóstico severo.</p><div id="severity" class="severity"></div><div class="report-note">Incluye pacientes sin episodios. Las reasignaciones de cama no se cuentan como nuevos ataques.</div></section></div>
+    <footer><span>Hospital de los Costeños con Narcolepsia</span><span>Datos ficticios · Sesión en memoria · POO / EIA</span></footer>
+  </main>
+</body>
+</html>
