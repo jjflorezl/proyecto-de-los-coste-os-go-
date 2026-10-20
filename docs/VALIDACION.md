@@ -17,6 +17,8 @@ Fecha: 19 de octubre de 2026, Colombia. Entorno: Windows amd64, Go 1.26.5. El m�
 | Escenario completo a través de HTTP | Probado con `httptest`, incluidos el 409 y la reasignación |
 | Archivos `/`, `/app.js`, `/style.css` | Entregados con HTTP 200 en las pruebas |
 | Lectores HTTP concurrentes con simulación | Prueba ejecutada con el detector de carreras |
+| Exportación limpia de `HEAD` | `go run .`, `go test ./...` y `go vet ./...` correctos, sin archivos locales auxiliares |
+| `git fsck --full` | Correcto; integridad de los objetos y del historial local |
 
 Una ejecución de tres segundos produjo 21 ataques nuevos, 9 intentos sin cama y 22 despertares, con 25 episodios históricos en total. Los despertares pueden superar los ataques de la simulación porque esta comienza después del escenario obligatorio, con tres pacientes ya dormidos. Estos números son evidencia de una ejecución, no valores que deban repetirse: el planificador de goroutines introduce variaciones.
 
@@ -54,3 +56,5 @@ Se configuraron `PATH`, `CC=x86_64-w64-mingw32-gcc` y `CGO_ENABLED=1` solo para 
 El servidor se compiló y los handlers y recursos se comprobaron con `httptest`. El navegador integrado de este entorno devolvió `ERR_CONNECTION_TIMED_OUT` al intentar abrir el servidor local. Por ello **no se afirma una revisión visual completada ni se entrega una captura como si se hubiera observado la interfaz funcionando**. Para verla en una sesión normal del equipo: `go run ./cmd/web` y abrir `http://127.0.0.1:8080`.
 
 Las pruebas de servidor no sustituyen una prueba visual del navegador. El diseño incluye estilos adaptables, búsqueda, filtros, mensajes de estado y controles accesibles; su apariencia debe revisarse en el navegador del estudiante antes de la entrega.
+
+El intento de `git clone` local encontró una restricción del proceso MSYS de Git en el sandbox (`NtCreateDirectoryObject`, acceso denegado). Se verificó una exportación limpia creada con `git archive HEAD` como alternativa, sin afirmar que el comando de clonación hubiera funcionado en este entorno. El ZIP de entrega conserva además `.git` y sus commits.
