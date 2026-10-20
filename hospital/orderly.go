@@ -28,5 +28,18 @@ func (o *Orderly) Attend(p *Patient, location string) (EpisodeRecord, error) {
 	if h.staffByID[o.ID()] != o {
 		return EpisodeRecord{}, fmt.Errorf("camillero no contratado")
 	}
+	if !h.hasPatientLocked(p) {
+		return EpisodeRecord{}, ErrNotAdmitted
+	}
+	// A transfer is not a second sleep attack. Keep the original record and dispatcher.
+	if p.state == AsleepInHallway {
+		_, err := h.assignRoomLocked(p)
+		for _, record := range h.history {
+			if record.id == p.pendingEpisode {
+				return record, err
+			}
+		}
+		return EpisodeRecord{}, fmt.Errorf("paciente sin episodio pendiente")
+	}
 	return h.attendLocked(p, location, o, nil)
 }

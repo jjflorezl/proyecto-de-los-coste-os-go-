@@ -276,3 +276,31 @@ func TestDoctorRescueAndDiagnosis(t *testing.T) {
 		t.Fatal("relación médico-paciente incorrecta")
 	}
 }
+
+func TestOrderlyRescuesExistingEpisode(t *testing.T) {
+	h, _, ps := fixture(t, 0, 1)
+	o, err := NewOrderly(h, "C1", "Camillero", 30)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := h.HireOrderly(o); err != nil {
+		t.Fatal(err)
+	}
+	if err := ps[0].SufferSleepAttack("Pasillo"); !errors.Is(err, ErrNoBed) {
+		t.Fatal(err)
+	}
+	r, err := NewRoom(h, 101, 1)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := h.RegisterRoom(r); err != nil {
+		t.Fatal(err)
+	}
+	record, err := o.Attend(ps[0], "Pasillo")
+	if err != nil {
+		t.Fatal(err)
+	}
+	if record.AssignedRoom() != r || ps[0].State() != AsleepInBed || len(h.History()) != 1 {
+		t.Fatal("el traslado debe rescatar el episodio existente")
+	}
+}
