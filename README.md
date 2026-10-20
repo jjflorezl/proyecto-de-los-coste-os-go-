@@ -136,11 +136,4 @@ En Linux/macOS puedes omitir `.exe`. No necesitas esos binarios para ejecutar co
 - [Validación realizada](docs/VALIDACION.md).
 - [Declaración de uso de IA](AI_USAGE.md).
 
-El repositorio local contiene commits reales de esta sesión, sin fechas alteradas. **No constituye un enlace remoto de entrega**. Para publicarlo, crea un repositorio vacío en tu cuenta y ejecuta los siguientes comandos usando su URL real:
 
-```sh
-git remote add origin URL_DE_TU_REPOSITORIO
-git push -u origin main
-```
-
-Si ya existe `origin`, revisa `git remote -v` antes de cambiarlo. No ejecutes nuevamente `git init` ni elimines `.git`: ahí está la historia. Antes de entregar, revisa todo el código, completa la reflexión personal de `AI_USAGE.md` con lo que realmente aprendiste y entrega el enlace que solicite el docente.
